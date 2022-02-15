@@ -241,9 +241,31 @@ translate.exponential_smoothing <- function(x, engine = x$engine, ...) {
 exp_smoothing_stan_fit_impl <- function(x, y, seasonality = 1, seasonality2 = 1, seasonality.type = "multiplicative", 
                                         error.size.method = "std", level.method = "HW", ...) {
     
-    print('Hallo Welt...bin drin!')
-    stop()
+    switch(Sys.info()[['sysname']],
+    Windows= {print("I'm a Windows PC.")
+        opMode<-'local'
+    },
+    Linux  = {print("I'm a penguin.")
+        opMode<-'host'
+    },
+    Darwin = {print("I'm a Mac.")})
+
+    if(opMode=='host'){
+        psl_path<-'/home/rstud/R/adthocStrat/'
+    }else{
+        psl_path<-'C:/Users/Stevie/0_FUNCTIONAL_LSTM_RNN/data/'
+    }
+
+    # bayesSetupStanEts[['NUM_OF_ITER']]          <-50
+    # bayesSetupStanEts[['MAX_NUM_OF_REPEATS']]   <-1
+    # bayesSetupStanEts[['verbose']]              <-TRUE
+
+    needleFile          <- paste0(psl_path,'bayesSetupStanEts.Rds')
+    bayesSetupStanEts   <- do.call(readRDS,list(file=needleFile))
     
+    # print('Hallo Welt...bin drin!')
+    # stop()
+
     # X & Y
     # Expect outcomes  = vector
     # Expect predictor = data.frame
@@ -277,6 +299,8 @@ exp_smoothing_stan_fit_impl <- function(x, y, seasonality = 1, seasonality2 = 1,
                                    error.size.method = error.size.method,
                                    level.method      = level.method,
                                    xreg              = xreg_matrix,
+                                   control=rlgt.control(NUM_OF_ITER=as.numeric(bayesSetupStanEts[['NUM_OF_ITER']]),MAX_NUM_OF_REPEATS=as.numeric(bayesSetupStanEts[['MAX_NUM_OF_REPEATS']])),
+                                   verbose=as.logical(bayesSetupStanEts[['verbose']]),
                                    ...)
     } else {
         fit_smooth   <- Rlgt::rlgt(y                 = outcome,
@@ -285,6 +309,8 @@ exp_smoothing_stan_fit_impl <- function(x, y, seasonality = 1, seasonality2 = 1,
                                    seasonality.type  = seasonality.type,
                                    error.size.method = error.size.method,
                                    level.method      = level.method,
+                                   control=rlgt.control(NUM_OF_ITER=as.numeric(bayesSetupStanEts[['NUM_OF_ITER']]),MAX_NUM_OF_REPEATS=as.numeric(bayesSetupStanEts[['MAX_NUM_OF_REPEATS']])),
+                                   verbose=as.logical(bayesSetupStanEts[['verbose']]),
                                    ...)
     }
     
