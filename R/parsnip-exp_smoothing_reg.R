@@ -299,7 +299,7 @@ exp_smoothing_stan_fit_impl <- function(x, y, seasonality = 1, seasonality2 = 1,
                                    error.size.method = error.size.method,
                                    level.method      = level.method,
                                    xreg              = xreg_matrix,
-                                   control=rlgt.control(NUM_OF_ITER=as.numeric(bayesSetupStanEts[['NUM_OF_ITER']]),MAX_NUM_OF_REPEATS=as.numeric(bayesSetupStanEts[['MAX_NUM_OF_REPEATS']])),
+                                   control=Rlgt::rlgt.control(NUM_OF_ITER=as.numeric(bayesSetupStanEts[['NUM_OF_ITER']]),MAX_NUM_OF_REPEATS=as.numeric(bayesSetupStanEts[['MAX_NUM_OF_REPEATS']])),
                                    verbose=as.logical(bayesSetupStanEts[['verbose']]),
                                    ...)
     } else {
@@ -309,7 +309,7 @@ exp_smoothing_stan_fit_impl <- function(x, y, seasonality = 1, seasonality2 = 1,
                                    seasonality.type  = seasonality.type,
                                    error.size.method = error.size.method,
                                    level.method      = level.method,
-                                   control=rlgt.control(NUM_OF_ITER=as.numeric(bayesSetupStanEts[['NUM_OF_ITER']]),MAX_NUM_OF_REPEATS=as.numeric(bayesSetupStanEts[['MAX_NUM_OF_REPEATS']])),
+                                   control=Rlgt::rlgt.control(NUM_OF_ITER=as.numeric(bayesSetupStanEts[['NUM_OF_ITER']]),MAX_NUM_OF_REPEATS=as.numeric(bayesSetupStanEts[['MAX_NUM_OF_REPEATS']])),
                                    verbose=as.logical(bayesSetupStanEts[['verbose']]),
                                    ...)
     }
