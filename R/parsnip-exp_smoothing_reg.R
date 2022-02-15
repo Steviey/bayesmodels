@@ -241,6 +241,9 @@ translate.exponential_smoothing <- function(x, engine = x$engine, ...) {
 exp_smoothing_stan_fit_impl <- function(x, y, seasonality = 1, seasonality2 = 1, seasonality.type = "multiplicative", 
                                         error.size.method = "std", level.method = "HW", ...) {
     
+    print('Hallo Welt...bin drin!')
+    stop()
+    
     # X & Y
     # Expect outcomes  = vector
     # Expect predictor = data.frame
